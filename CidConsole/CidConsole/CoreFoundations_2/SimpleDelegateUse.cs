@@ -4,6 +4,16 @@ namespace CidConsole.CoreFoundations_2
 {
     //Delegates
 
+    //A delegate is a reference to a method. 
+    //Whereas objects can easily be sent as parameters into methods, constructor or whatever, 
+    //methods are a bit more tricky. But every once in a while you might feel the need to send a method
+    //as a parameter to another method, and that's when you'll need delegates.
+
+    //consider delegates to be Anonymous Interfaces. In many cases you can use them whenever you need an interface with a single method, but you don't want the overhead of defining that interface.
+
+    //Delegates can be chained together; for example, multiple methods can be called on a single event.
+
+    //http://stackoverflow.com/questions/2019402/when-why-to-use-delegates
 
     //Essentially,
     //delegates provide a level of indirection: instead of specifying behavior to be executed
@@ -33,7 +43,15 @@ namespace CidConsole.CoreFoundations_2
 
     //proc1("Hello"); compiles to proc1.Invoke("Hello"); which at execution time invokes PrintString("Hello");
 
-
+    //another xample
+    //Delegates are extremely useful when wanting to declare a block of code that you want to pass around. 
+    //For example when using a generic retry mechanism. 
+    //function Retry(Delegate func, int numberOfTimes)
+    //try
+    //{
+    //   func.Invoke();
+    //}
+    //catch { if(numberOfTimes blabla) func.Invoke(); etc. etc. }
 
 
 
@@ -81,6 +99,8 @@ namespace CidConsole.CoreFoundations_2
     }
 
     //another example
+    //By defining a delegate, you are saying to the user of your class 
+    //"Please feel free to put any method that match this signature here and it will be called each time my delegate is called".
     public delegate int Calculate(int value1, int value2);
 
     //creating the class which contains the methods 
@@ -115,6 +135,7 @@ namespace CidConsole.CoreFoundations_2
             Calculate sub = new Calculate(mc.sub);
 
             //using the delegate objects to call the assigned methods 
+            //add and sub invoke the delegate - which executes the method provided to the delegate earlier.
             Console.WriteLine("Adding two values: " + add(10, 6));
             Console.WriteLine("Subtracting two values: " + sub(10, 4));
         }
