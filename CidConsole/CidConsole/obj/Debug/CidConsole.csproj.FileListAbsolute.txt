@@ -1,1 +1,6 @@
 C:\wombat\WLD-Github\CSharpInDepth\CidConsole\CidConsole\bin\Debug\CidConsole.exe.config
+C:\wombat\WLD-Github\CSharpInDepth\CidConsole\CidConsole\bin\Debug\CidConsole.exe
+C:\wombat\WLD-Github\CSharpInDepth\CidConsole\CidConsole\bin\Debug\CidConsole.pdb
+C:\wombat\WLD-Github\CSharpInDepth\CidConsole\CidConsole\obj\Debug\CidConsole.csprojResolveAssemblyReference.cache
+C:\wombat\WLD-Github\CSharpInDepth\CidConsole\CidConsole\obj\Debug\CidConsole.exe
+C:\wombat\WLD-Github\CSharpInDepth\CidConsole\CidConsole\obj\Debug\CidConsole.pdb

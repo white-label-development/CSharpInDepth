@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using CidConsole.CoreFoundations_2;
 
 namespace CidConsole
 {
@@ -10,6 +7,15 @@ namespace CidConsole
     {
         static void Main(string[] args)
         {
+            //Run Delegate example 1
+            //SimpleDelegateUse.Run();
+
+            //Run Delegate example 2
+            SimpleDelegateUse2.Run();
+
+
+            //hold...
+            Console.ReadLine();
         }
     }
 }
