@@ -4,10 +4,15 @@ namespace CidConsole.CoreFoundations_2
 {
     //Delegates
 
+    // http://blogs.msdn.com/b/brunoterkaly/archive/2012/03/02/c-delegates-actions-lambdas-keeping-it-super-simple.aspx
+
     //A delegate is a reference to a method. 
     //Whereas objects can easily be sent as parameters into methods, constructor or whatever, 
     //methods are a bit more tricky. But every once in a while you might feel the need to send a method
     //as a parameter to another method, and that's when you'll need delegates.
+
+    //If I want something to happen when a button is clicked, I don’t want to have to change the code of the button 
+    //I just want to tell the button to call one of my methods, which will take the appropriate action.
 
     //consider delegates to be Anonymous Interfaces. In many cases you can use them whenever you need an interface with a single method, but you don't want the overhead of defining that interface.
 
@@ -54,7 +59,7 @@ namespace CidConsole.CoreFoundations_2
     //catch { if(numberOfTimes blabla) func.Invoke(); etc. etc. }
 
 
-
+    
     delegate void StringProcessor(string input);
 
     public class Person
