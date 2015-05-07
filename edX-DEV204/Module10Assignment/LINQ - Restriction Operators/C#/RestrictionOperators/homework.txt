@@ -1,0 +1,14 @@
+﻿// note: I'm using the method syntax as I prefer it.
+// https://msdn.microsoft.com/en-us/library/bb397947.aspx
+
+// Write a LINQ statement to find all products that are in stock and cost more than 3.00 per unit.
+var expensiveInStockProducts = products.Where(x => x.UnitsInStock > 0 && x.UnitPrice > 3);
+
+// Write a LINQ statement to find all customers in Washington.
+var waCustomers = customers.Where(x => x.Region == "WA");
+
+//Write a LINQ statement to sort a list of products by name.
+var sortedProducts = products.OrderBy(x => x.ProductName).ToList();
+
+//Write a LINQ statement to use orderby and descending to sort a list of doubles from highest to lowest.
+var sortedDoubles = doubles.OrderByDescending(x => x);
