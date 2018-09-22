@@ -36,7 +36,8 @@ namespace ConsoleApp1.IterationSpike
             //UpdateAppleIdInLoop(apples); //update apple property in foreach. this works as expected (phew! I've not gone crazy!)
             //UpdateBananaPropertyInLoop(apples); //update apple property in foreach. this works as expected 
 
-            //UpdateBanenaPropertyInLoop DID NOT WORK in real life yesterday - so I need to replicate my environment better. let's try again:
+            //UpdateBananaPropertyInLoop DID NOT WORK in real life yesterday - so I need to replicate my environment better. let's try again:
+            UpdateBananaPropertyInArrayLoop(apples);
         }
 
         public void UpdateAppleIdInLoop(IEnumerable<Apple> apples)
@@ -67,14 +68,25 @@ namespace ConsoleApp1.IterationSpike
             }
         }
 
-        public void UpdateBananaPropertyInLoop2(IEnumerable<Apple> apples)
+        public void UpdateBananaPropertyInArrayLoop(IEnumerable<Apple> apples)
         {
 
             //ok, I actually had "cfoCateringCafeDto" == apple
             //and cfoCateringCafeDto.CafeCateringCustomers == apple.Bananas
 
+            //in my failed example from adv
+            //foreach (var ccc in cfoCateringCafeDto.CafeCateringCustomers)
+            //{
+            //    ccc.CateringOptionName = "foo";
+            //}
+            //... and all records ccc.CateringOptionName = null (not set)
 
             var apple1 = apples.FirstOrDefault();
+
+            //is it the underlying collection type?
+            var array = new Banana[]{ new Banana { Id = 100, Name = "1-100" }, new Banana { Id = 101, Name = "1-101" }, new Banana { Id = 102, Name = "1-102" } };
+            apple1.Bananas = array;
+            
             foreach (var banana in apple1.Bananas)
             {
                 banana.Name = "foo";
@@ -84,6 +96,33 @@ namespace ConsoleApp1.IterationSpike
             {
                 Console.WriteLine("banana.Name=" + banana.Name);
             }
+
+            //still works. It must be the type of the IEnumerable<Banana>
+
+            //SOLVED----------------
+            //dto.CafeCateringCustomers = poco.CafeCateringCustomers.Select(x => new CafeCateringCustomer
+            //{
+
+            //    Name = x.ParticipantSurnameString,
+            //    CateringOptionName = null,
+            //    Pax = x.PaxNumber,
+            //    VoucherNumber = x.VoucherCode,
+            //    SupplyPrice = null,
+            //    SellPackageText = x.SellPackageText
+            //});
+
+            //should have ended with .ToList() - without it the IEnumerable was actually a Linq select result - so could not be changed. 
+            //dto.CafeCateringCustomers = poco.CafeCateringCustomers.Select(x => new CafeCateringCustomer
+            //{
+
+            //    Name = x.ParticipantSurnameString,
+            //    CateringOptionName = null,
+            //    Pax = x.PaxNumber,
+            //    VoucherNumber = x.VoucherCode,
+            //    SupplyPrice = null,
+            //    SellPackageText = x.SellPackageText
+            //}).ToList();
+
         }
     }
 
