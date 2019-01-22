@@ -63,11 +63,27 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PlayerCharacter.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PlayerCharacter.feature</DependentUpon>
+    </Compile>
+    <Compile Include="PlayerCharacterSteps.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="PlayerCharacter.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>PlayerCharacter.feature.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GameCore\GameCore.csproj">
+      <Project>{f2dc53ef-834f-44ca-9b13-455435f0c757}</Project>
+      <Name>GameCore</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\SpecFlow.2.4.1\build\SpecFlow.targets" Condition="Exists('..\packages\SpecFlow.2.4.1\build\SpecFlow.targets')" />
