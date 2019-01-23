@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using TechTalk.SpecFlow;
 using Xunit;
 
@@ -53,6 +54,27 @@ namespace GameCore.Specs
         {
             Assert.True(_player.IsDead);
         }
+
+        [Given(@"I have a damage resistance of (.*)")]
+        public void GivenIHaveADamageResistanceOf(int p0)
+        {
+            _player.DamageResistance = p0;
+        }
+
+        [Given(@"I'm an Elf")]
+        public void GivenImAnElf()
+        {
+            _player.Race = "Elf";
+        }
+
+        [Given(@"I have the following attributes")]
+        public void GivenIHaveTheFollowingAttributes(Table table)
+        {
+            _player.Race = table.Rows.First(x => x["attribute"] == "Race")["value"];
+            _player.DamageResistance = int.Parse(table.Rows.First(x => x["attribute"] == "Resistance")["value"]);
+        }
+
+
 
     }
 }
