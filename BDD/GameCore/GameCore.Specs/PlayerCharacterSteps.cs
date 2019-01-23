@@ -146,5 +146,19 @@ namespace GameCore.Specs
         }
 
 
+        //replace Table table, with IEnumerable<Weapon> weapons, using a CustomConversion
+        [Given(@"I have the following weapons")]
+        public void GivenIHaveTheFollowingWeapons(IEnumerable<Weapon> weapons)
+        {
+            _player.Weapons.AddRange(weapons);
+        }
+
+        [Then(@"My weapons should be worth (.*)")]
+        public void ThenMyWeaponsShouldBeWorth(int p0)
+        {
+            Assert.Equal(p0, _player.WeaponsValue); 
+        }
+
+
     }
 }

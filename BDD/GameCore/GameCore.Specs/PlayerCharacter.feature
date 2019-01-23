@@ -80,3 +80,12 @@ Scenario: Reading a restore health scroll when rested has a full effect
 	When I take 40 damage
 		And I read a restore health scroll
 	Then My health should now be 100
+
+Scenario: Weapons are worth money
+Given I have the following weapons
+|name|value|
+|Sword|50|
+|Pick|40|
+|Knife|10|
+Then My weapons should be worth 100
+

@@ -284,6 +284,38 @@ this.FeatureBackground();
             this.ScenarioCleanup();
         }
         
+        [Xunit.FactAttribute(DisplayName="Weapons are worth money")]
+        [Xunit.TraitAttribute("FeatureTitle", "PlayerCharacter")]
+        [Xunit.TraitAttribute("Description", "Weapons are worth money")]
+        public virtual void WeaponsAreWorthMoney()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Weapons are worth money", null, ((string[])(null)));
+#line 84
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 7
+this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                        "name",
+                        "value"});
+            table3.AddRow(new string[] {
+                        "Sword",
+                        "50"});
+            table3.AddRow(new string[] {
+                        "Pick",
+                        "40"});
+            table3.AddRow(new string[] {
+                        "Knife",
+                        "10"});
+#line 85
+testRunner.Given("I have the following weapons", ((string)(null)), table3, "Given ");
+#line 90
+testRunner.Then("My weapons should be worth 100", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
         [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.4.0.0")]
         [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
         public class FixtureData : System.IDisposable
