@@ -49,6 +49,7 @@ Scenario:Elf race characters get additional 20 damage resistance using data tabl
 	When I take 40 damage
 	Then My health should now be 90
 
+# demonstrates step argument conversion of "Healer" to CharacterClass enum type.
 Scenario: Healers restore all health
 	Given My character class is set to Healer
 	When I take 40 damage
