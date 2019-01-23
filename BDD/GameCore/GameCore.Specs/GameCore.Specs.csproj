@@ -69,6 +69,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomConversions.cs" />
     <Compile Include="PlayerAttributes.cs" />
     <Compile Include="PlayerCharacter.feature.cs">
       <AutoGen>True</AutoGen>

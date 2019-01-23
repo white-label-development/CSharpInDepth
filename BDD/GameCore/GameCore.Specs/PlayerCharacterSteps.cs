@@ -131,5 +131,20 @@ namespace GameCore.Specs
             Assert.Equal(p0, _player.MagicalPower); 
         }
 
+        //capture entire phrase "x days ago"
+
+        [Given(@"I last slept (.* days ago)")]
+        public void GivenILastSleptDaysAgo(DateTime lastSlept)
+        {
+            _player.LastSleepTime = lastSlept;
+        }
+
+        [When(@"I read a restore health scroll")]
+        public void WhenIReadARestoreHealthScroll()
+        {
+            _player.ReadHealthScroll();
+        }
+
+
     }
 }
