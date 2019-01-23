@@ -11,8 +11,16 @@ namespace GameCore.Specs
     [Binding]
     public class PlayerCharacterSteps
     {
+        private readonly PlayerCharacterStepsContext _context;
 
+        //private PlayerCharacter _player;  # replacing this with a context injected object
         private PlayerCharacter _player;
+
+        public PlayerCharacterSteps(PlayerCharacterStepsContext context)
+        {
+            _context = context;
+            _player = _context.Player;
+        }
 
         [Given(@"I'm a new player")]
         public void GivenImANewPlayer()
@@ -159,6 +167,27 @@ namespace GameCore.Specs
             Assert.Equal(p0, _player.WeaponsValue); 
         }
 
+        [Given(@"I have an Amulet with a power of (.*)")]
+        public void GivenIHaveAnAmuletWithAPowerOf(int power)
+        {
+            _player.MagicalItems.Add(new MagicalItem { Name = "Amulet", Power = power });
+            _context.StartingMagicalPower = power; //store to retrieve later
+
+
+        }
+
+        [When(@"I use a magical Amulet")]
+        public void WhenIUseAMagicalAmulet()
+        {
+            _player.UseMagicalItem("Amulet");
+        }
+
+        [Then(@"The Amulet power should not be reduced")]
+        public void ThenTheAmuletPowerShouldNotBeReduced()
+        {
+            int expectedPower = _context.StartingMagicalPower; //set from GivenIHaveAnAmuletWithAPowerOf
+            Assert.Equal(expectedPower, _player.MagicalItems.First(x => x.Name=="Amulet").Power);
+        }
 
     }
 }

@@ -77,6 +77,7 @@
       <DependentUpon>PlayerCharacter.feature</DependentUpon>
     </Compile>
     <Compile Include="PlayerCharacterSteps.cs" />
+    <Compile Include="PlayerCharacterStepsContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
