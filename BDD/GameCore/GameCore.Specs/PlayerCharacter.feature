@@ -58,7 +58,14 @@ Scenario: Healers restore all health
 
 
 
-
+# multi column step table data
+Scenario: Total magical power
+Given I have the following magical items
+| name   | value | power |
+| Ring   | 200   | 100   |
+| Amulet | 400   | 200   |
+| Gloves | 100   | 400   |
+Then My total magical power should be 700
 
 
 

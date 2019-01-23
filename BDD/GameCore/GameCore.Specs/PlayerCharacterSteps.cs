@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
@@ -107,6 +109,27 @@ namespace GameCore.Specs
             _player.CastHealingSpell();
         }
 
+        [Given(@"I have the following magical items")]
+        public void GivenIHaveTheFollowingMagicalItems(Table table)
+        {
+
+            IEnumerable<MagicalItem> items = table.CreateSet<MagicalItem>(); //pour table data into variable
+            _player.MagicalItems.AddRange(items);
+
+            //an alternative dynamic method to extract from the table is
+            IEnumerable<dynamic> items2 = table.CreateDynamicSet();
+            foreach (var magicalItem in items2)
+            {
+                var nameForDynamicObect = magicalItem.name;
+                //_player.MagicalItems.Add(....
+            }
+        }
+
+        [Then(@"My total magical power should be (.*)")]
+        public void ThenMyTotalMagicalPowerShouldBe(int p0)
+        {
+            Assert.Equal(p0, _player.MagicalPower); 
+        }
 
     }
 }
