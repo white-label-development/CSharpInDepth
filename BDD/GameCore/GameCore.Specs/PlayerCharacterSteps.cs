@@ -75,14 +75,24 @@ namespace GameCore.Specs
         //    _player.DamageResistance = int.Parse(table.Rows.First(x => x["attribute"] == "Resistance")["value"]);
         //}
 
-        // #strongly typed version
+        // #strongly typed version with concrete class
+        //[Given(@"I have the following attributes")]
+        //public void GivenIHaveTheFollowingAttributes(Table table)
+        //{
+        //    var attributes = table.CreateInstance<PlayerAttributes>();
+        //    _player.Race = attributes.Race;
+        //    _player.DamageResistance = attributes.Resistance;
+        //}
+
+        // #strongly typed version with dynamic class
         [Given(@"I have the following attributes")]
         public void GivenIHaveTheFollowingAttributes(Table table)
         {
-            var attributes = table.CreateInstance<PlayerAttributes>();
+            //var attributes = table.CreateInstance<PlayerAttributes>();
+            dynamic attributes = table.CreateDynamicInstance();
+
             _player.Race = attributes.Race;
             _player.DamageResistance = attributes.Resistance;
-
         }
 
         [Given(@"My character class is set to (.*)")]
