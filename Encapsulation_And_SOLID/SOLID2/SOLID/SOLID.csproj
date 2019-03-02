@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D9FC582C-1483-4279-B63D-A195F5B95D2F}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>SOLID</RootNamespace>
+    <AssemblyName>SOLID</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="NullGuard, Version=1.5.2.0, Culture=neutral, PublicKeyToken=1958ac8092168428, processorArchitecture=MSIL">
+      <HintPath>packages\NullGuard.Fody.1.5.2\lib\dotnet\NullGuard.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DemeterLaw\After.cs" />
+    <Compile Include="DemeterLaw\Before.cs" />
+    <Compile Include="DemeterLaw\Wallet.cs" />
+    <Compile Include="DIP\GainDivergenceChecker.cs" />
+    <Compile Include="DIP\SimpleIoC.cs" />
+    <Compile Include="DIP\ViewModel.cs" />
+    <Compile Include="Encapsulation\PoorEncapsulation.cs" />
+    <Compile Include="ISP\Adapter.cs" />
+    <Compile Include="ISP\CardReadersCommunicatorView.cs" />
+    <Compile Include="ISP\Config\AppConfig.cs" />
+    <Compile Include="ISP\IBankTerminal.cs" />
+    <Compile Include="ISP\PdqTerminal.cs" />
+    <Compile Include="ISP\ZapTerminal.cs" />
+    <Compile Include="ISP\ZonTerminal.cs" />
+    <Compile Include="LSP\Fixed\Fixed.cs" />
+    <Compile Include="LSP\Violation\Downcast.cs" />
+    <Compile Include="LSP\Violation\Variance.cs" />
+    <Compile Include="LSP\Violation\Violation.cs" />
+    <Compile Include="LSP\Violation\Contracts.cs" />
+    <Compile Include="Monads\Maybe.cs" />
+    <Compile Include="Monads\Result.cs" />
+    <Compile Include="Monads\ResultExtensions.cs" />
+    <Compile Include="OCP\DeviceModel.cs" />
+    <Compile Include="OCP\Refactored\BillDispenserEcdm.cs" />
+    <Compile Include="OCP\Refactored\Client.cs" />
+    <Compile Include="OCP\Refactored\CloseCommandVisitor.cs" />
+    <Compile Include="OCP\Refactored\CoinDispenserCube4.cs" />
+    <Compile Include="OCP\Refactored\Device.cs" />
+    <Compile Include="OCP\Refactored\DeviceEx.cs" />
+    <Compile Include="OCP\Refactored\DeviceFinder.cs" />
+    <Compile Include="OCP\Refactored\IDevice.cs" />
+    <Compile Include="OCP\Refactored\IDeviceVisitor.cs" />
+    <Compile Include="OCP\SingleChoice.cs" />
+    <Compile Include="OCP\TemplateMethod.cs" />
+    <Compile Include="SRP\MoreExamples\Violation1.cs" />
+    <Compile Include="OCP\Violation\DeviceFinder.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SRP\Patterns\Facade.cs" />
+    <Compile Include="SRP\PaymentDetails.cs" />
+    <Compile Include="SRP\PaymentMethod.cs" />
+    <Compile Include="SRP\Refactored\BankGateway.cs" />
+    <Compile Include="SRP\Refactored\ICanOperateWithCash.cs" />
+    <Compile Include="SRP\Refactored\ICanPayViaCreditCard.cs" />
+    <Compile Include="SRP\Refactored\OnlinePayment.cs" />
+    <Compile Include="SRP\Refactored\PaymentModel.cs" />
+    <Compile Include="SRP\Refactored\PosTerminalPayment.cs" />
+    <Compile Include="SRP\TicketDetails.cs" />
+    <Compile Include="SRP\Violation\PaymentModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+    <None Include="Solid-notes.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="FodyWeavers.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="packages\Fody.2.0.7\build\dotnet\Fody.targets" Condition="Exists('packages\Fody.2.0.7\build\dotnet\Fody.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\Fody.2.0.7\build\dotnet\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Fody.2.0.7\build\dotnet\Fody.targets'))" />
+  </Target>
+</Project>
