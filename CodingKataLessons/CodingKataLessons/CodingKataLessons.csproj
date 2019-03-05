@@ -64,6 +64,7 @@
   <ItemGroup>
     <Compile Include="FindDigitalRoot.cs" />
     <Compile Include="FindIntWithOddCount.cs" />
+    <Compile Include="IpValidation.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
