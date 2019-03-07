@@ -62,6 +62,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DirectionsReduction.cs" />
     <Compile Include="FindDigitalRoot.cs" />
     <Compile Include="FindIntWithOddCount.cs" />
     <Compile Include="IpValidation.cs" />
