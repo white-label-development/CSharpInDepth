@@ -4,3 +4,10 @@ C:\wombat\WLD-Github\CSharpInDepth\Delegates\Delegates101\Delegates101\bin\Debug
 C:\wombat\WLD-Github\CSharpInDepth\Delegates\Delegates101\Delegates101\obj\Debug\Delegates101.csprojResolveAssemblyReference.cache
 C:\wombat\WLD-Github\CSharpInDepth\Delegates\Delegates101\Delegates101\obj\Debug\Delegates101.exe
 C:\wombat\WLD-Github\CSharpInDepth\Delegates\Delegates101\Delegates101\obj\Debug\Delegates101.pdb
+E:\Wunderpus\WLD-GitHub\CSharpInDepth\Delegates\Delegates101\Delegates101\bin\Debug\Delegates101.exe.config
+E:\Wunderpus\WLD-GitHub\CSharpInDepth\Delegates\Delegates101\Delegates101\bin\Debug\Delegates101.exe
+E:\Wunderpus\WLD-GitHub\CSharpInDepth\Delegates\Delegates101\Delegates101\bin\Debug\Delegates101.pdb
+E:\Wunderpus\WLD-GitHub\CSharpInDepth\Delegates\Delegates101\Delegates101\obj\Debug\Delegates101.csprojAssemblyReference.cache
+E:\Wunderpus\WLD-GitHub\CSharpInDepth\Delegates\Delegates101\Delegates101\obj\Debug\Delegates101.csproj.CoreCompileInputs.cache
+E:\Wunderpus\WLD-GitHub\CSharpInDepth\Delegates\Delegates101\Delegates101\obj\Debug\Delegates101.exe
+E:\Wunderpus\WLD-GitHub\CSharpInDepth\Delegates\Delegates101\Delegates101\obj\Debug\Delegates101.pdb

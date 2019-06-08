@@ -10,10 +10,11 @@ namespace Generics101
     {
         static void Main(string[] args)
         {
-            var car1 = new Car<V8> { ID = 1, Make = "Ford" };
-            var car2 = new Car<V8> { ID = 2, Make = "Toyota" };
+            //Car.cs - a bit simple.
 
-            var cars = new List<Car<V8>>(); //super simple example of a generic list of Cars with a V8. List<Car<T>>() would be better though.
+            //MoshTutorial.cs - youtube generics tutorial
+
+
         }
     }
 }
