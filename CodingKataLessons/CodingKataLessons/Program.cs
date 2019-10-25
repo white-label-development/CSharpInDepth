@@ -10,7 +10,7 @@ namespace CodingKataLessons
     {
         static void Main(string[] args)
         {
-            
+            new LargeFactorialsTests().BasicTests();
 
         }
     }
