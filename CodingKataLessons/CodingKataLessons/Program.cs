@@ -10,8 +10,8 @@ namespace CodingKataLessons
     {
         static void Main(string[] args)
         {
-            new LargeFactorialsTests().BasicTests();
-
+            LargeFactorials.Factorial(100);
+            Console.ReadLine();
         }
     }
 }
