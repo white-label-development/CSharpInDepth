@@ -1,4 +1,6 @@
-## Asynchronous programming in .NET
+# Asynchronous programming in .NET
+
+## Basic async await stuff
 
 `WebClient` = sync _vs_ `HttpClient` = async
 
@@ -42,6 +44,8 @@ As normal as long as async + await is used. Async all the way.
 Best Practices:
 
 avoid `.Result()` (without await) and `.Wait()`.
+
+## Using the Task Parallel Library
 
 
 
