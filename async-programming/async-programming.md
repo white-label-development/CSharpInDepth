@@ -54,7 +54,7 @@ var lines = File.ReadAllLines('some file');
 
 We can use the TPL to achieve what we get (for free) with async/await.
 
-`Task` represents an async operation.
+`Task` represents an async operation. Swallows exceptions.
 
 `Task.Run()` queues the work passed as the action to run on a different thread by using the thread pool, and returns a `Task` that represents the ongoing work.
 
@@ -96,7 +96,7 @@ var loadLinesTask = Task.Run(() => {
     return lines;  
 });
 
-// ContinueWith creates a continuation which runs async. This means it also returns a task.
+// ContinueWith creates a continuation (which is executed on a different thread) which runs async. This means it also returns a task.
 
 loadLinesTask.ContinueWith(t => {
     var lines = t.Result() ... 
@@ -135,4 +135,163 @@ Can create Continuation that only get called with there is a fault (such as to w
 
 
 ### Task Cancellation
-@stopped here. 3.4
+
+CancellationTokenSource can produce a Token
+`var loadTask = service.GetStockPricesFor(ticker, cancellationTokenSource.Token);`
+
+and later in GetStockPricesFor()
+
+`var result = await client.GetAsync($"http://localhost:61363/api/stocks/{ticker}",
+                    cancellationToken);`
+
+
+```
+CancellationTokenSource cancellationTokenSource = null;
+private void Search_Click(object sender, RoutedEventArgs e){
+
+    // stuff
+
+    if(cancellationTokenSource != null){
+        cancellationTokenSource.Cancel();
+        cancellationTokenSource = null;
+        return; //if here, button to search has been clicked already, for SearchForStock() and the token set.
+    }
+
+    cancellationTokenSource = new CancellationTokenSource();
+    cancellationTokenSource.Token.Register(() =>
+    {
+        Notes.Text += "Cancellation requested" + Environment.NewLine;
+    });
+    var loadLinesTask = SearchForStocks(cancellationTokenSource);
+    
+    //etc
+    // in loadlineTask ...
+    var processStocksTask = loadLinesTask.ContinueWith(t => { ... whatever }, TaskContinuationOptions.OnlyOnRanToCompletion);
+
+}
+```
+Note: revisit this when actually using as there are some nuances.
+
+
+### All or Any Completion
+
+```
+var service = new StockService();
+
+var tickerLoadingTasks = new List<Task<IEnumerable<StockPrice>>>();
+foreach (var ticker in tickers) //load them one at a time (but in parallel)
+{
+    var loadTask = service.GetStockPricesFor(ticker, cancellationTokenSource.Token);
+    tickerLoadingTasks.Add(loadTask);
+}
+
+
+var allStocksLoadingTask = Task.WhenAll(tickerLoadingTasks); // all Tasks must be done
+
+var completedTask = await Task.WhenAny(timeoutTask, allStocksLoadingTask); // first task(fastest), Returns a task, not the result as it's Task<Task>
+
+if (completedTask == timeoutTask)
+{
+    cancellationTokenSource.Cancel();
+    cancellationTokenSource = null;
+    throw new Exception("Timeout!");
+}
+
+Stocks.ItemsSource = allStocksLoadingTask.Result.SelectMany(stocks => stocks);
+```
+
+
+### Precomputed Results of a Task
+
+Fake an sync method (such as in a mock of a service) using options like `Task.FromResult`
+```
+return Task.FromResult(myInMemoryTestData.Where(stock => stock.Ticker == ticker));
+```
+
+
+### Process tasks as they complete
+
+```
+var service = new StockService();
+var stocks = new ConcurrentBag<StockPrice>(); //thread safe. Normal List<T> is not.
+
+var tickerLoadingTasks = new List<Task<IEnumerable<StockPrice>>>();
+        foreach (var ticker in tickers)
+        {
+            var loadTask = service.GetStockPricesFor(ticker, cancellationTokenSource.Token)
+                .ContinueWith(t =>
+                {
+                    foreach (var stock in t.Result.Take(5)) stocks.Add(stock);
+
+                    Dispatcher.Invoke(() =>
+                    {
+                        Stocks.ItemsSource = stocks.ToArray();
+                    });
+
+                    return t.Result; //otherwise would return a Task
+                });
+
+            tickerLoadingTasks.Add(loadTask);
+        }
+
+await Task.WhenAll(tickerLoadingTasks);
+
+```
+
+### Controlling the continuations
+
+eg: `.ConfigureAwait(false)` useful when you don't care about the original context. Method scoped. Dropped in ASP.NET Core which does not leverage a synchroniation context. Ideally just avoid.
+
+
+
+### Parallel Extensions (leverages TPL under the hood)
+
+Parallel programming lets you break down a problem and compute each piece independently.
+
+```
+Parallel.Invoke(new ParallelOptions { CancellationToken = cancellationTokenSource.Token
+    },
+        () =>
+        {
+                                
+            Debug.WriteLine("Starting Operation 1");                                        
+            CalculateExpensiveComputation(loadedStocks);   
+            Debug.WriteLine("Completed Operation 1");                                       
+        },
+        () =>
+        {                                        
+            Debug.WriteLine("Starting Operation 2");                                       
+            CalculateExpensiveComputation(loadedStocks);
+            Debug.WriteLine("Completed Operation 2");
+            #endregion
+        }                                   
+)
+```
+Note: Parallel.Invoke is blocking.
+
+(skipped a bit)
+
+### Async Deep Dive
+
+Compare
+
+```
+public async Task<string> ReadFile(){
+    var data = await File.ReadAllTextASync("x.txt");
+    return data;
+} 
+```
+
+```
+public Task<string> ReadFile(){
+    return File.ReadAllTextASync("x.txt"); //returns a reference to the task
+} 
+```
+
+Both work, but async/await creates a state machine. The second is faster and makes most sense as we are not doing anything in the continuation. The first is safer.
+
+The Task Completion Source is used to introduce a task into the app .. skipped
+
+### Implications of async/await
+
+The state machine tracks tasks in the current context and executes the continuation on the correct context. Each async method has it's own state machine.
