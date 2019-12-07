@@ -65,3 +65,58 @@ Can use AutoFac Configuration Nuget package to have json/xml configuration file.
 
 
 
+### Injecting and Resolving
+
+Scenario: 5 action methods, each needs a diferenr dependency injected - but only 1 of the 5 will be used in any request. 
+It's a waste of resources to instantiate them all - can't we just new the one we need without resorting to method injection?...
+
+Use of "creation component" to resolve other components - based on abstract factory / service locator
+
+```
+    public class ComponentLocator : IComponentLocator
+    {
+        public ComponentLocator(ILifetimeScope container)  {  _Container = container; }
+
+        ILifetimeScope _Container;
+
+        T IComponentLocator.ResolveComponent<T>() {  return _Container.Resolve<T>();  }
+    }
+
+    public interface IComponentLocator  { T ResolveComponent<T>(); }
+
+```
+
+IComponentLocator is first registered with AF, then injected into ctor, amd used within methods
+
+```
+ IBlogPostRepository blogPostRepository = _ComponentLocator.ResolveComponent<IBlogPostRepository>();
+```
+
+In a view we can also access the built in MVC.DependencyResolver which has autofac registered to it as tje current implementation.
+```
+ var localStrings = DependencyResolver.Current.GetService<EasyBlog.Web.Core.ILocalStrings>();
+```
+
+### Advanced Patterns
+
+Decorators in this context is a pattern we can use to DI constructs we don't control. eg: Configuration Manager, Activator methods (static classes) etc.
+
+Solution is to wrap or factory what we need, abstract to an Interface, register and inject.
+
+Also covered:
+
+MVC and API attributes, with property injection ... .PropertiesAutowired() .... 
+
+
+### Additional Scenarios
+
+owi, etc.
+
+DONE
+-------------------------------------
+
+
+
+
+
+
