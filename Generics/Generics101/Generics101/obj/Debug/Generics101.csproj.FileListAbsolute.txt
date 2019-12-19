@@ -1,6 +1,0 @@
-C:\wombat\WLD-Github\CSharpInDepth\Generics\Generics101\Generics101\bin\Debug\Generics101.exe.config
-C:\wombat\WLD-Github\CSharpInDepth\Generics\Generics101\Generics101\bin\Debug\Generics101.exe
-C:\wombat\WLD-Github\CSharpInDepth\Generics\Generics101\Generics101\bin\Debug\Generics101.pdb
-C:\wombat\WLD-Github\CSharpInDepth\Generics\Generics101\Generics101\obj\Debug\Generics101.csprojResolveAssemblyReference.cache
-C:\wombat\WLD-Github\CSharpInDepth\Generics\Generics101\Generics101\obj\Debug\Generics101.exe
-C:\wombat\WLD-Github\CSharpInDepth\Generics\Generics101\Generics101\obj\Debug\Generics101.pdb

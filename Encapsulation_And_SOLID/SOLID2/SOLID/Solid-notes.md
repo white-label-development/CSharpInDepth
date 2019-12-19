@@ -1,6 +1,7 @@
 ﻿### Revisiting SOLID code
 
 Largely about dependency management.
+also file:///C:/Users/neil/OneDrive/Work/books/solid-principles.pdf (book by EngineerSpock)
 
 #### SRP
 

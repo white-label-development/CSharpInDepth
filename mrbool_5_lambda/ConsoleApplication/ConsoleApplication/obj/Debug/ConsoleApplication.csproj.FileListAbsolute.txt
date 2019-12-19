@@ -1,5 +1,0 @@
-C:\wombat\WLD-Github\CSharpInDepth\mrbool_5_lambda\ConsoleApplication\ConsoleApplication\bin\Debug\ConsoleApplication.exe.config
-C:\wombat\WLD-Github\CSharpInDepth\mrbool_5_lambda\ConsoleApplication\ConsoleApplication\bin\Debug\ConsoleApplication.exe
-C:\wombat\WLD-Github\CSharpInDepth\mrbool_5_lambda\ConsoleApplication\ConsoleApplication\bin\Debug\ConsoleApplication.pdb
-C:\wombat\WLD-Github\CSharpInDepth\mrbool_5_lambda\ConsoleApplication\ConsoleApplication\obj\Debug\ConsoleApplication.exe
-C:\wombat\WLD-Github\CSharpInDepth\mrbool_5_lambda\ConsoleApplication\ConsoleApplication\obj\Debug\ConsoleApplication.pdb
