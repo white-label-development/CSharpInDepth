@@ -62,5 +62,59 @@ The example above uses reflection to create instance each time. This really shou
 
 note: .NET will look for the assembly in the GAC and the same location as the .exe
 
+The logic improvement here is generics:
 
-@demo dynamic loading
+```
+public static T Get<T>() where T : class
+{
+    string requestedType = typeof(T).ToString(); // requestedType == the appSettings key
+    string resolvedTypeName = ConfigurationManager.AppSettings[requestedType]; //get appSettings key value = is type AQN eg: "GenericRepository.CSV.PersonRepository, GenericRepository.CSV, Version=1.0.0.0, Culture=neutral"
+    Type resolvedType = Type.GetType(resolvedTypeName); // string to resolved type
+    object instance = Activator.CreateInstance(resolvedType); // type to instance
+    T result = instance as T;
+    return result;
+}
+```
+
+
+## Discovering Types in Assemblies
+
+example scenario: order taker - looks in a /rules/ folder for .dll that contains the order rules. The idea being we don't have to modify code in OrderTaker, instead we load in what changes (the customer specific rules).
+
+
+```
+ public static class DynamicOrderRuleLoader
+{
+    public static List<DynamicOrderRule> LoadRules(string assemblyPath)
+    {
+        var rules = new List<DynamicOrderRule>();
+
+        if (!Directory.Exists(assemblyPath)) return rules;
+
+        IEnumerable<string> assemblyFiles = Directory.EnumerateFiles(assemblyPath, "*.dll", SearchOption.TopDirectoryOnly); // get files
+
+        foreach (string assemblyFile in assemblyFiles)
+        {
+            Assembly assembly = Assembly.LoadFrom(assemblyFile); // load assembly from the file system
+            foreach (Type type in assembly.ExportedTypes)
+            {
+                // look for classes that implement IOrderRule
+                if (type.IsClass && typeof(IOrderRule).IsAssignableFrom(type))
+                {
+                    IOrderRule rule = Activator.CreateInstance(type) as IOrderRule;
+                    rules.Add(new DynamicOrderRule(
+                        rule,
+                        type.FullName,
+                        type.Assembly.GetName().Name));
+                }
+            }
+        }
+
+        return rules;
+    }
+}
+```
+
+
+
+@???
