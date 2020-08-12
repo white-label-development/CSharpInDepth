@@ -57,10 +57,29 @@ hmn caution n+1 issues.
 
 
 
+## Understanding the AutoMapper UseValue() and ResolveUsing() methods
 
+The AutoMapper UseValue() method is used to retrieve a value on the first-run and stores it in the mapping 
 
+whereas the ResolveUsing() method resolves at run-time (eg: DateTime.Now).
 
+```
+  //To Store Static Value use the UseValue() method
+  .ForMember(dest => dest.FixedValue, act => act.UseValue("Hello"))
+```
 
+```
+  //To Store DateTime value use ResolveUsing() method
+  .ForMember(dest => dest.DOJ, act => act.ResolveUsing(src =>
+  {
+    return DateTime.Now;
+  }))
+```
+
+```
+  //if null, substitute a value
+  .ForMember(dest => dest.BAddress, act => act.NullSubstitute("N/A"))
+```
 
 
 
